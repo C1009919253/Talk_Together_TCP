@@ -130,6 +130,25 @@
      </rect>
     </property>
    </widget>
+   <widget class="QPushButton" name="select_image">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>590</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>楷体</family>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>选择图片</string>
+    </property>
+   </widget>
    <zorder>message</zorder>
    <zorder>label_3</zorder>
    <zorder>connect</zorder>
@@ -138,6 +157,7 @@
    <zorder>serverport</zorder>
    <zorder>label</zorder>
    <zorder>serverip</zorder>
+   <zorder>select_image</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -145,7 +165,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>26</height>
+     <height>28</height>
     </rect>
    </property>
   </widget>

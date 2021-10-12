@@ -17,6 +17,10 @@ MainWindow::~MainWindow()
 void MainWindow::InitServe()
 {
     myServer = new QTcpServer(this);
+    image_html = "";
+    image = "";
+    TS = "";
+    mode = 0;
 }
 
 void MainWindow::on_connect_clicked()
@@ -81,18 +85,71 @@ void MainWindow::oneProcessReadyRead()
 {
     QTcpSocket *client = (QTcpSocket *)this->sender();
     QString str1 = QString("客户端[%1:%2] 说：\n").arg(client->peerAddress().toString()).arg(client->peerPort());
-    QString msg;
+    //this->ui->information->append(str1);
+    QString msg = "";
     QString str2;
     while(!client->atEnd())
         msg.append(QString(client->readAll()));
-    str2 = QString("%1%2").arg(str1).arg(msg);
-    this->ui->information->append(str2);
     for(int i = 0; i < arrayClient.length(); i++) // 收到的信息发送给其他客户端
         if(arrayClient.at(i)->peerAddress().toString() != client->peerAddress().toString() || arrayClient.at(i)->peerPort() != client->peerPort())
         {
-            arrayClient.at(i)->write(str2.toUtf8());
-            ui->message->clear();
+            arrayClient.at(i)->write("###commonbegin###");
+            arrayClient.at(i)->waitForReadyRead();
+            arrayClient.at(i)->write(str1.toUtf8()+"###commonend###");
+            arrayClient.at(i)->waitForReadyRead();
+            arrayClient.at(i)->write(msg.toUtf8());
         }
+    if(msg == "###commonbegin###")
+    {
+        TS = "";
+        client->write("ok");
+        mode = 1; // 开始接受
+        return;
+    }
+    if(mode == 1)
+    {
+        if(msg.contains("###commonend###"))
+        {
+            msg = msg.replace("###commonend###", "");
+            mode = 0;
+            TS.append(msg);
+            this->ui->information->append(str1);
+            this->ui->information->append(TS);
+            TS = "";
+            client->write("ok");
+            return;
+        }
+        TS.append(msg);
+    }
+    if(msg == "###imagebegin###")
+    {
+        TS = "";
+        client->write("ok");
+        mode = 2; // 开始接受
+        return;
+    }
+    if(mode == 2)
+    {
+        if(msg.contains("###imageend###"))
+        {
+            msg = msg.replace("###imageend###", "");
+            mode = 0;
+            TS.append(msg);
+            QImage image = Base64TOImage(TS);
+            QString cache = "cache.jpg";
+            image.save(cache, "JPG", -1);
+            QString img_html = ImgPathToHtml(cache);
+            this->ui->information->append(str1);
+            this->ui->information->append(img_html);
+            //this->ui->information->append(TS);
+            TS = "";
+            client->write("ok");
+            return;
+        }
+        TS.append(msg);
+    }
+    //str2 = QString("%1%2").arg(str1).arg(msg);
+    //this->ui->information->append(str2);
 }
 
 void MainWindow::oneProcessConnected()
@@ -108,15 +165,42 @@ void MainWindow::on_send_clicked()
     QString ip = ui->clientip->text();
     QString port = ui->clientport->text();
     QString msg = this->ui->message->toPlainText();
-    this->ui->information->append("你说：\n" + msg);
-    QString fro = "后台程序员大爷说：\n"+msg;
+    this->ui->information->append("你说：\n" + msg + "\n");
+    QString fro = "后台程序员大爷说：\n"+msg+"\n";
+    QString fro2 = "";
+    if(image_html != "" && image != "")
+    {
+        //this->ui->information->append(image_html);
+        QImage img(image);
+        //this->ui->information->append(QString(ImageToBase64(img)));
+        //fro = fro + "###image###"+QString(ImageToBase64(img));
+        fro2 = QString(ImageToBase64(img));
+        this->ui->information->append(image_html);
+    }
     for(int i = 0; i < arrayClient.length(); i++)
         if(ip == "" || arrayClient.at(i)->peerAddress().toString() == ip)
             if(port == "" || arrayClient.at(i)->peerPort() == port.toUInt())
             {
+                arrayClient.at(i)->write("###commonbegin###");
+                arrayClient.at(i)->waitForReadyRead();
                 arrayClient.at(i)->write(fro.toUtf8());
-                ui->message->clear();
+                //arrayClient.at(i)->waitForReadyRead();
+                arrayClient.at(i)->write("###commonend###");
+                arrayClient.at(i)->waitForReadyRead();
+                if(image_html != "" && image != "")
+                {
+                    arrayClient.at(i)->write("###imagebegin###");
+                    arrayClient.at(i)->waitForReadyRead();
+                    arrayClient.at(i)->write(fro2.toUtf8());
+                    //arrayClient.at(i)->waitForReadyRead();
+                    arrayClient.at(i)->write("###imageend###");
+                    arrayClient.at(i)->waitForReadyRead();
+                }
+                //ui->message->clear();
             }
+    this->ui->message->clear();
+    image_html = "";
+    image = "";
 }
 
 void MainWindow::on_freshen_clicked()
@@ -177,4 +261,54 @@ void MainWindow::del_connect()
             arrayClient.at(i)->close(); // 断开连接！！！！！！！！！！老子就是后台！！！！！！！！
             break;
         }
+}
+
+void MainWindow::on_select_image_clicked()
+{
+    //定义文件对话框类
+    QFileDialog *fileDialog = new QFileDialog(this);
+    //定义文件对话框标题
+    fileDialog->setWindowTitle(QStringLiteral("选择图片"));
+    //设置默认文件路径
+    fileDialog->setDirectory(".");
+    //设置文件过滤器
+    fileDialog->setNameFilter(tr("File(*.jpg)"));
+    //设置可以选择多个文件,默认为只能选择一个文件QFileDialog::ExistingFiles
+    fileDialog->setFileMode(QFileDialog::ExistingFiles);
+    //设置视图模式
+    fileDialog->setViewMode(QFileDialog::Detail);
+    //打印所有选择的文件的路径
+    QStringList fileNames;
+    if (fileDialog->exec())
+    {
+        fileNames = fileDialog->selectedFiles();
+    }
+    if(fileNames.length() <= 0)
+        return;
+    image = fileNames[0];
+    image_html = ImgPathToHtml(fileNames[0]);
+    this->ui->message->append(image_html);
+}
+
+QString MainWindow::ImgPathToHtml(QString path)
+{
+    path = QString("<img src=\"%1\"/>").arg(path); // 转换为Html
+    return path;
+}
+
+QByteArray MainWindow::ImageToBase64(const QImage &image)
+{
+    QByteArray imageData;
+    QBuffer buffer(&imageData);
+    image.save(&buffer, "jpg");
+    imageData = imageData.toBase64();
+    return imageData;
+}
+
+QImage MainWindow::Base64TOImage(const QString &data)
+{
+    QByteArray imageData = QByteArray::fromBase64(data.toLatin1());
+    QImage image;
+    image.loadFromData(imageData);
+    return image;
 }

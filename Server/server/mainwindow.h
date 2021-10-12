@@ -8,6 +8,10 @@
 #include<QNetworkInterface>
 #include<QMessageBox>
 #include<QTcpSocket>
+#include<QFileDialog>
+#include<QString>
+#include<QByteArray>
+#include<QBuffer>
 
 using namespace std;
 
@@ -37,12 +41,21 @@ private slots:
 
     void on_clientlist_customContextMenuRequested(const QPoint &pos);
 
+    void on_select_image_clicked();
+
 private:
     Ui::MainWindow *ui;
     QTcpServer *myServer;
     QList<QTcpSocket *> arrayClient;
     QTcpSocket *client;
+    QString image_html;
+    QString image;
+    QString TS;
+    int mode;
 
     void InitServe();
+    QString ImgPathToHtml(QString path);
+    QByteArray ImageToBase64(const QImage &image);
+    QImage Base64TOImage(const QString &data);
 };
 #endif // MAINWINDOW_H

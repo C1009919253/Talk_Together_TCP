@@ -8,6 +8,12 @@
 #include<QNetworkInterface>
 #include<QMessageBox>
 #include<QTcpSocket>
+#include<QByteArray>
+#include<QThread>
+#include<QFileDialog>
+#include<QString>
+#include<QByteArray>
+#include<QBuffer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -29,9 +35,19 @@ private slots:
     void oneProcessDisconnected();
     void oneProcessError(QAbstractSocket::SocketError err);
 
+    void on_select_image_clicked();
+
 private:
     Ui::MainWindow *ui;
     QTcpSocket *myClient;
+    QString TS;
+    int mode;
+    QString image_html;
+    QString image;
+
     void InitSocket();
+    QString ImgPathToHtml(QString path);
+    QImage Base64TOImage(const QString &data);
+    QByteArray ImageToBase64(const QImage &image);
 };
 #endif // MAINWINDOW_H
