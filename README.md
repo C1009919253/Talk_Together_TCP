@@ -2,13 +2,17 @@
 
 # Update Log
 
+ver 1.0.2.211015_Base: Fix the bug that crashing when communicate with more than two clients...
+
 ver 1.0.1.211012_Base: Now you can send pictures...
 
 ver 1.0.0.211010_Base: Talk with each other...
 
 # Bug now
 
-It may crash went communicate with more than two clients.
+The picture cache has something wrong...
+
+[fixed]It may crash went communicate with more than two clients.
 
 Format is confused...
 

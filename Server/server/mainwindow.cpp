@@ -17,6 +17,10 @@ MainWindow::~MainWindow()
 void MainWindow::InitServe()
 {
     myServer = new QTcpServer(this);
+    this->ui->text_clientip->setText(tr("客户端 ip："));
+    this->ui->text_serverip->setText(tr("服务器 ip："));
+    this->ui->text_clientport->setText(tr("客户端 port："));
+    this->ui->text_serverport->setText(tr("服务器 port："));
     image_html = "";
     image = "";
     TS = "";
@@ -31,13 +35,13 @@ void MainWindow::on_connect_clicked()
     bool ret = myServer->listen(QHostAddress(myAddr), myPort.toUInt());
     if(!ret)
     {
-        msg = "绑定失败！\n";
+        msg = tr("绑定失败！\n");
         this->ui->information->setText(msg);
         return;
     }
     else
     {
-        msg = "绑定成功！\n";
+        msg = tr("绑定成功！\n");
         this->ui->connect->setEnabled(false);
         this->ui->information->setText(msg);
     }
@@ -54,7 +58,7 @@ void MainWindow::oneProcessNewConnection()
     connect(client, SIGNAL(disconnected()), this, SLOT(oneProcessDisconnected()));
     connect(client, SIGNAL(readyRead()), this, SLOT(oneProcessReadyRead()));
     connect(client, SIGNAL(connected()), this, SLOT(oneProcessConnected()));
-    QString msg = QString("客户端[%1:%2] 连入！\n").arg(client->peerAddress().toString()).arg(client->peerPort());
+    QString msg = QString(tr("客户端[%1:%2] 连入！\n")).arg(client->peerAddress().toString()).arg(client->peerPort());
     this->ui->information->append(msg);
     on_freshen_clicked();
 }
@@ -67,7 +71,7 @@ void MainWindow::oneProcessAcceptError(QAbstractSocket::SocketError err)
 void MainWindow::oneProcessDisconnected()
 {
     QTcpSocket *client = (QTcpSocket *)this->sender();
-    QString msg = QString("客户端[%1:%2]   退出！\n").arg(client->peerAddress().toString()).arg(client->peerPort());
+    QString msg = QString(tr("客户端[%1:%2]   退出！\n")).arg(client->peerAddress().toString()).arg(client->peerPort());
     this->ui->information->append(msg);
     for(int i = 0; i < arrayClient.length(); i++)
     {
@@ -84,20 +88,23 @@ void MainWindow::oneProcessDisconnected()
 void MainWindow::oneProcessReadyRead()
 {
     QTcpSocket *client = (QTcpSocket *)this->sender();
-    QString str1 = QString("客户端[%1:%2] 说：\n").arg(client->peerAddress().toString()).arg(client->peerPort());
+    QString str1 = QString(tr("客户端[%1:%2] 说：")).arg(client->peerAddress().toString()).arg(client->peerPort());
     //this->ui->information->append(str1);
     QString msg = "";
     QString str2;
     while(!client->atEnd())
         msg.append(QString(client->readAll()));
+    if(msg == "" || msg == "ok")
+        return;
     for(int i = 0; i < arrayClient.length(); i++) // 收到的信息发送给其他客户端
         if(arrayClient.at(i)->peerAddress().toString() != client->peerAddress().toString() || arrayClient.at(i)->peerPort() != client->peerPort())
         {
-            arrayClient.at(i)->write("###commonbegin###");
-            arrayClient.at(i)->waitForReadyRead();
-            arrayClient.at(i)->write(str1.toUtf8()+"###commonend###");
-            arrayClient.at(i)->waitForReadyRead();
+            //arrayClient.at(i)->write("###commonbegin###");
+            //arrayClient.at(i)->waitForReadyRead();
+            //arrayClient.at(i)->write(str1.toUtf8()+"###commonend###");
+            //arrayClient.at(i)->waitForReadyRead();
             arrayClient.at(i)->write(msg.toUtf8());
+            //arrayClient.at(i)->waitForReadyRead();
         }
     if(msg == "###commonbegin###")
     {
@@ -136,7 +143,7 @@ void MainWindow::oneProcessReadyRead()
             mode = 0;
             TS.append(msg);
             QImage image = Base64TOImage(TS);
-            QString cache = "cache.jpg";
+            QString cache = "cache/cache.jpg";
             image.save(cache, "JPG", -1);
             QString img_html = ImgPathToHtml(cache);
             this->ui->information->append(str1);
@@ -165,8 +172,8 @@ void MainWindow::on_send_clicked()
     QString ip = ui->clientip->text();
     QString port = ui->clientport->text();
     QString msg = this->ui->message->toPlainText();
-    this->ui->information->append("你说：\n" + msg + "\n");
-    QString fro = "后台程序员大爷说：\n"+msg+"\n";
+    this->ui->information->append(tr("你说：\n") + msg + "\n");
+    QString fro = tr("后台程序员大爷说：\n")+msg+"\n";
     QString fro2 = "";
     if(image_html != "" && image != "")
     {
@@ -208,7 +215,7 @@ void MainWindow::on_freshen_clicked()
     this->ui->clientlist->clear();
     for(int i = 0; i < arrayClient.length(); i++)
     {
-        QString lis = QString("客户端[%1:%2]").arg(arrayClient.at(i)->peerAddress().toString()).arg(arrayClient.at(i)->peerPort());
+        QString lis = QString(tr("客户端[%1:%2]")).arg(arrayClient.at(i)->peerAddress().toString()).arg(arrayClient.at(i)->peerPort());
         this->ui->clientlist->addItem(lis);
         this->ui->clientlist->item(i)->setForeground(QBrush(QColor(Qt::white)));
         this->ui->clientlist->item(i)->setBackground(QColor(70, 153, 181));
@@ -224,7 +231,7 @@ void MainWindow::on_clientlist_customContextMenuRequested(const QPoint &pos)
     if(curItem == NULL)
         return;
     QMenu *popMenu = new QMenu(this);
-    QAction *delconnect = new QAction("断开连接", this);
+    QAction *delconnect = new QAction(tr("断开连接"), this);
     popMenu->addAction(delconnect);
     connect(delconnect, SIGNAL(triggered()), this, SLOT(del_connect()));
     popMenu->exec(QCursor::pos());
@@ -257,7 +264,8 @@ void MainWindow::del_connect()
     for(int i = 0; i < arrayClient.length(); i++)
         if(ip == arrayClient.at(i)->peerAddress().toString() && port.toUInt() == arrayClient.at(i)->peerPort())
         {
-            arrayClient.at(i)->write("由于您的恶劣行径，您被伟大的后台大爷关闭了连接");
+            QString clomsg = tr("由于您的恶劣行径，您被伟大的后台大爷关闭了连接");
+            arrayClient.at(i)->write(clomsg.toUtf8());
             arrayClient.at(i)->close(); // 断开连接！！！！！！！！！！老子就是后台！！！！！！！！
             break;
         }
@@ -268,11 +276,11 @@ void MainWindow::on_select_image_clicked()
     //定义文件对话框类
     QFileDialog *fileDialog = new QFileDialog(this);
     //定义文件对话框标题
-    fileDialog->setWindowTitle(QStringLiteral("选择图片"));
+    fileDialog->setWindowTitle(QStringLiteral("select image"));
     //设置默认文件路径
     fileDialog->setDirectory(".");
     //设置文件过滤器
-    fileDialog->setNameFilter(tr("File(*.jpg)"));
+    fileDialog->setNameFilter("File(*.jpg)");
     //设置可以选择多个文件,默认为只能选择一个文件QFileDialog::ExistingFiles
     fileDialog->setFileMode(QFileDialog::ExistingFiles);
     //设置视图模式

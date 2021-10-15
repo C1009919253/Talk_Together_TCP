@@ -43,9 +43,11 @@ void MainWindow::oneProcessConnected()
 
 void MainWindow::oneProcessReadyRead()
 {
-    QString msg, str;
+    QString str;
     while(!myClient->atEnd())
         str.append(QString(myClient->readAll()));
+    if(str == "" || str == "ok")
+        return;
     if(str == "###commonbegin###")
     {
         TS = "";
@@ -112,8 +114,8 @@ void MainWindow::on_send_clicked()
     QString fro2 = "";
     myClient->write("###commonbegin###");
     myClient->waitForReadyRead();
-    myClient->write(msg.toUtf8());
-    myClient->write("###commonend###");
+    myClient->write(msg.toUtf8()+"###commonend###");
+    //myClient->write("###commonend###");
     myClient->waitForReadyRead();
     if(image != "" && image_html != "")
     {

@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="text_serverip">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -33,7 +33,7 @@
      <string>服务器ip：</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="text_clientip">
     <property name="geometry">
      <rect>
       <x>360</x>
@@ -52,7 +52,7 @@
      <string>客户端ip：</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_3">
+   <widget class="QLabel" name="text_serverport">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -71,7 +71,7 @@
      <string>服务器port：</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_4">
+   <widget class="QLabel" name="text_clientport">
     <property name="geometry">
      <rect>
       <x>360</x>
@@ -188,7 +188,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLabel" name="label_5">
+   <widget class="QLabel" name="usersonline">
     <property name="geometry">
      <rect>
       <x>720</x>
@@ -259,10 +259,10 @@
     </property>
    </widget>
    <zorder>message</zorder>
-   <zorder>label</zorder>
-   <zorder>label_2</zorder>
-   <zorder>label_3</zorder>
-   <zorder>label_4</zorder>
+   <zorder>text_serverip</zorder>
+   <zorder>text_clientip</zorder>
+   <zorder>text_serverport</zorder>
+   <zorder>text_clientport</zorder>
    <zorder>serverip</zorder>
    <zorder>clientip</zorder>
    <zorder>serverport</zorder>
@@ -270,7 +270,7 @@
    <zorder>connect</zorder>
    <zorder>send</zorder>
    <zorder>information</zorder>
-   <zorder>label_5</zorder>
+   <zorder>usersonline</zorder>
    <zorder>clientlist</zorder>
    <zorder>freshen</zorder>
    <zorder>select_image</zorder>
