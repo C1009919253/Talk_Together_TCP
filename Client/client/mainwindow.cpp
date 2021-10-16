@@ -22,6 +22,9 @@ void MainWindow::InitSocket()
     mode = 0;
     image = "";
     image_html = "";
+    QDir *creatdir = new QDir;
+    if(!creatdir->exists("cache"))
+        creatdir->mkdir("cache");
 }
 
 void MainWindow::on_connect_clicked()
@@ -84,7 +87,7 @@ void MainWindow::oneProcessReadyRead()
             mode = 0;
             TS.append(str);
             QImage image = Base64TOImage(TS);
-            QString cache = "cache.jpg";
+            QString cache= "cache/" + QDateTime::currentDateTime().toString("yyyy-MM-ddHH-mm-ss")  + ".jpg";
             image.save(cache, "JPG", -1);
             QString img_html = ImgPathToHtml(cache);
             this->ui->information->append(img_html);
@@ -112,9 +115,12 @@ void MainWindow::on_send_clicked()
 {
     QString msg = this->ui->message->toPlainText();
     QString fro2 = "";
+    QString nickname = this->ui->nickname->text();
     myClient->write("###commonbegin###");
     myClient->waitForReadyRead();
-    myClient->write(msg.toUtf8()+"###commonend###");
+    if(nickname == "")
+        nickname = "某不愿透露姓名的同学";
+    myClient->write(nickname.toUtf8()+"说：\n"+msg.toUtf8()+"###commonend###");
     //myClient->write("###commonend###");
     myClient->waitForReadyRead();
     if(image != "" && image_html != "")

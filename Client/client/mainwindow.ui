@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>90</y>
+      <y>50</y>
       <width>191</width>
       <height>41</height>
      </rect>
@@ -36,8 +36,8 @@
    <widget class="QPushButton" name="connect">
     <property name="geometry">
      <rect>
-      <x>400</x>
-      <y>40</y>
+      <x>390</x>
+      <y>0</y>
       <width>141</width>
       <height>41</height>
      </rect>
@@ -85,7 +85,7 @@
     <property name="geometry">
      <rect>
       <x>240</x>
-      <y>90</y>
+      <y>50</y>
       <width>141</width>
       <height>41</height>
      </rect>
@@ -95,7 +95,7 @@
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>40</y>
+      <y>0</y>
       <width>171</width>
       <height>41</height>
      </rect>
@@ -124,7 +124,7 @@
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>40</y>
+      <y>0</y>
       <width>181</width>
       <height>41</height>
      </rect>
@@ -149,6 +149,35 @@
      <string>选择图片</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>100</y>
+      <width>191</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>楷体</family>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>昵称：</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="nickname">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>100</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+   </widget>
    <zorder>message</zorder>
    <zorder>label_3</zorder>
    <zorder>connect</zorder>
@@ -158,6 +187,8 @@
    <zorder>label</zorder>
    <zorder>serverip</zorder>
    <zorder>select_image</zorder>
+   <zorder>label_4</zorder>
+   <zorder>nickname</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -165,7 +196,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>28</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>

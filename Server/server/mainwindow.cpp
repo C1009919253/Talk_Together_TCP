@@ -25,6 +25,9 @@ void MainWindow::InitServe()
     image = "";
     TS = "";
     mode = 0;
+    QDir *creatdir = new QDir;
+    if(!creatdir->exists("cache"))
+        creatdir->mkdir("cache");
 }
 
 void MainWindow::on_connect_clicked()
@@ -120,7 +123,7 @@ void MainWindow::oneProcessReadyRead()
             msg = msg.replace("###commonend###", "");
             mode = 0;
             TS.append(msg);
-            this->ui->information->append(str1);
+            //this->ui->information->append(str1);
             this->ui->information->append(TS);
             TS = "";
             client->write("ok");
@@ -143,10 +146,11 @@ void MainWindow::oneProcessReadyRead()
             mode = 0;
             TS.append(msg);
             QImage image = Base64TOImage(TS);
-            QString cache = "cache/cache.jpg";
+            QString cache= "cache/" + QDateTime::currentDateTime().toString("yyyy-MM-ddHH-mm-ss")  + ".jpg";
+            // cache = "cache/cache.jpg";
             image.save(cache, "JPG", -1);
             QString img_html = ImgPathToHtml(cache);
-            this->ui->information->append(str1);
+            // this->ui->information->append(str1);
             this->ui->information->append(img_html);
             //this->ui->information->append(TS);
             TS = "";
