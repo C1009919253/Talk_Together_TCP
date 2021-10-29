@@ -12,6 +12,9 @@
 #include<QString>
 #include<QByteArray>
 #include<QBuffer>
+#include<QScreen>
+#include<QPixmap>
+#include"screenshot_ui.h"
 
 using namespace std;
 
@@ -43,6 +46,8 @@ private slots:
 
     void on_select_image_clicked();
 
+    void on_screenshot_clicked();
+
 private:
     Ui::MainWindow *ui;
     QTcpServer *myServer;
@@ -52,6 +57,7 @@ private:
     QString image;
     QString TS;
     int mode;
+
 
     void InitServe();
     QString ImgPathToHtml(QString path);

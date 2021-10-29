@@ -18,13 +18,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    screenshot_ui.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    screenshot_ui.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    screenshot_ui.ui
 
 TRANSLATIONS += \
     server_zh_CN.ts

@@ -14,250 +14,163 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="text_serverip">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>10</y>
-      <width>171</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>楷体</family>
-      <pointsize>20</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>服务器ip：</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="text_clientip">
-    <property name="geometry">
-     <rect>
-      <x>360</x>
-      <y>10</y>
-      <width>171</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>楷体</family>
-      <pointsize>20</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>客户端ip：</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="text_serverport">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>60</y>
-      <width>191</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>楷体</family>
-      <pointsize>20</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>服务器port：</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="text_clientport">
-    <property name="geometry">
-     <rect>
-      <x>360</x>
-      <y>60</y>
-      <width>191</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>楷体</family>
-      <pointsize>20</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>客户端port：</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="serverip">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>10</y>
-      <width>181</width>
-      <height>41</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="clientip">
-    <property name="geometry">
-     <rect>
-      <x>520</x>
-      <y>10</y>
-      <width>181</width>
-      <height>41</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="serverport">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>60</y>
-      <width>141</width>
-      <height>41</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="clientport">
-    <property name="geometry">
-     <rect>
-      <x>560</x>
-      <y>60</y>
-      <width>141</width>
-      <height>41</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="connect">
-    <property name="geometry">
-     <rect>
-      <x>180</x>
-      <y>110</y>
-      <width>161</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>楷体</family>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>启动服务器！</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="send">
-    <property name="geometry">
-     <rect>
-      <x>560</x>
-      <y>620</y>
-      <width>141</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>楷体</family>
-      <pointsize>16</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>发送！</string>
-    </property>
-   </widget>
-   <widget class="QTextBrowser" name="information">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>170</y>
-      <width>691</width>
-      <height>321</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="message">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>500</y>
-      <width>691</width>
-      <height>161</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="usersonline">
-    <property name="geometry">
-     <rect>
-      <x>720</x>
-      <y>10</y>
-      <width>171</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>楷体</family>
-      <pointsize>20</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>在线用户：</string>
-    </property>
-   </widget>
-   <widget class="QListWidget" name="clientlist">
-    <property name="geometry">
-     <rect>
-      <x>715</x>
-      <y>51</y>
-      <width>411</width>
-      <height>611</height>
-     </rect>
-    </property>
-    <property name="contextMenuPolicy">
-     <enum>Qt::CustomContextMenu</enum>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="freshen">
-    <property name="geometry">
-     <rect>
-      <x>970</x>
-      <y>10</y>
-      <width>161</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>楷体</family>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>刷新！</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="select_image">
-    <property name="geometry">
-     <rect>
-      <x>420</x>
-      <y>620</y>
-      <width>141</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>楷体</family>
-      <pointsize>16</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>选择图片</string>
-    </property>
-   </widget>
+   <layout class="QGridLayout" name="gridLayout_4">
+    <item row="0" column="0">
+     <widget class="QLabel" name="text_serverip">
+      <property name="font">
+       <font>
+        <family>楷体</family>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>服务器ip：</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1" colspan="2">
+     <widget class="QLineEdit" name="serverip"/>
+    </item>
+    <item row="0" column="3" colspan="3">
+     <widget class="QLabel" name="text_clientip">
+      <property name="font">
+       <font>
+        <family>楷体</family>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>客户端ip：</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="6" colspan="3">
+     <widget class="QLineEdit" name="clientip"/>
+    </item>
+    <item row="0" column="9">
+     <widget class="QLabel" name="usersonline">
+      <property name="font">
+       <font>
+        <family>楷体</family>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>在线用户：</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="10">
+     <widget class="QPushButton" name="freshen">
+      <property name="font">
+       <font>
+        <family>楷体</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>刷新！</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" colspan="2">
+     <widget class="QLabel" name="text_serverport">
+      <property name="font">
+       <font>
+        <family>楷体</family>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>服务器port：</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QLineEdit" name="serverport"/>
+    </item>
+    <item row="1" column="3" colspan="4">
+     <widget class="QLabel" name="text_clientport">
+      <property name="font">
+       <font>
+        <family>楷体</family>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>客户端port：</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="7" colspan="2">
+     <widget class="QLineEdit" name="clientport"/>
+    </item>
+    <item row="1" column="9" rowspan="5" colspan="2">
+     <widget class="QListWidget" name="clientlist">
+      <property name="contextMenuPolicy">
+       <enum>Qt::CustomContextMenu</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1" colspan="2">
+     <widget class="QPushButton" name="connect">
+      <property name="font">
+       <font>
+        <family>楷体</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>启动服务器！</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0" colspan="9">
+     <widget class="QTextBrowser" name="information"/>
+    </item>
+    <item row="4" column="0" rowspan="2" colspan="9">
+     <widget class="QTextEdit" name="message"/>
+    </item>
+    <item row="5" column="4">
+     <widget class="QPushButton" name="screenshot">
+      <property name="font">
+       <font>
+        <family>楷体</family>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>截图</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="5" colspan="3">
+     <widget class="QPushButton" name="select_image">
+      <property name="font">
+       <font>
+        <family>楷体</family>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>选择图片</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="8">
+     <widget class="QPushButton" name="send">
+      <property name="font">
+       <font>
+        <family>楷体</family>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>   发送！</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
    <zorder>message</zorder>
    <zorder>text_serverip</zorder>
    <zorder>text_clientip</zorder>
@@ -274,6 +187,7 @@
    <zorder>clientlist</zorder>
    <zorder>freshen</zorder>
    <zorder>select_image</zorder>
+   <zorder>screenshot</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

@@ -324,3 +324,14 @@ QImage MainWindow::Base64TOImage(const QString &data)
     image.loadFromData(imageData);
     return image;
 }
+
+void MainWindow::on_screenshot_clicked()
+{
+    //QPixmap::grabWindow(QApplication::desktop()->winId()).save("123","jpg");
+    screenshut_UI *scs;
+    scs = new screenshut_UI;
+    scs->showFullScreen();
+    scs->setWindowModality(Qt::ApplicationModal);
+    scs->show();
+}
+
