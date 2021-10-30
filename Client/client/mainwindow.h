@@ -15,6 +15,8 @@
 #include<QByteArray>
 #include<QBuffer>
 
+#include"screenshot_ui.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -36,6 +38,8 @@ private slots:
     void oneProcessError(QAbstractSocket::SocketError err);
 
     void on_select_image_clicked();
+
+    void on_screenshot_clicked();
 
 private:
     Ui::MainWindow *ui;

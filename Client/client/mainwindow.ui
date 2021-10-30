@@ -14,44 +14,75 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>50</y>
-      <width>191</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>楷体</family>
-      <pointsize>20</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>服务器port：</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="connect">
-    <property name="geometry">
-     <rect>
-      <x>390</x>
-      <y>0</y>
-      <width>141</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>楷体</family>
-      <pointsize>16</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>连接！</string>
-    </property>
-   </widget>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QLabel" name="label">
+      <property name="font">
+       <font>
+        <family>楷体</family>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>服务器ip：</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1" colspan="2">
+     <widget class="QLineEdit" name="serverip"/>
+    </item>
+    <item row="0" column="3">
+     <widget class="QPushButton" name="connect">
+      <property name="font">
+       <font>
+        <family>楷体</family>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>连接！</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" colspan="2">
+     <widget class="QLabel" name="label_3">
+      <property name="font">
+       <font>
+        <family>楷体</family>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>服务器port：</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QLineEdit" name="serverport"/>
+    </item>
+    <item row="2" column="0" colspan="2">
+     <widget class="QLabel" name="label_4">
+      <property name="font">
+       <font>
+        <family>楷体</family>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>昵称：</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="2">
+     <widget class="QLineEdit" name="nickname"/>
+    </item>
+    <item row="3" column="0" colspan="4">
+     <widget class="QTextBrowser" name="information"/>
+    </item>
+    <item row="4" column="0" colspan="4">
+     <widget class="QTextEdit" name="message"/>
+    </item>
+   </layout>
    <widget class="QPushButton" name="send">
     <property name="geometry">
      <rect>
@@ -69,65 +100,6 @@
     </property>
     <property name="text">
      <string>发送！</string>
-    </property>
-   </widget>
-   <widget class="QTextBrowser" name="information">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>140</y>
-      <width>691</width>
-      <height>321</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="serverport">
-    <property name="geometry">
-     <rect>
-      <x>240</x>
-      <y>50</y>
-      <width>141</width>
-      <height>41</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>0</y>
-      <width>171</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>楷体</family>
-      <pointsize>20</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>服务器ip：</string>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="message">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>470</y>
-      <width>691</width>
-      <height>161</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="serverip">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>0</y>
-      <width>181</width>
-      <height>41</height>
-     </rect>
     </property>
    </widget>
    <widget class="QPushButton" name="select_image">
@@ -149,33 +121,23 @@
      <string>选择图片</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_4">
+   <widget class="QPushButton" name="screenshot">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>100</y>
-      <width>191</width>
+      <x>310</x>
+      <y>590</y>
+      <width>141</width>
       <height>41</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>楷体</family>
-      <pointsize>20</pointsize>
+      <pointsize>16</pointsize>
      </font>
     </property>
     <property name="text">
-     <string>昵称：</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="nickname">
-    <property name="geometry">
-     <rect>
-      <x>240</x>
-      <y>100</y>
-      <width>141</width>
-      <height>41</height>
-     </rect>
+     <string>截图</string>
     </property>
    </widget>
    <zorder>message</zorder>
@@ -189,6 +151,7 @@
    <zorder>select_image</zorder>
    <zorder>label_4</zorder>
    <zorder>nickname</zorder>
+   <zorder>screenshot</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -196,7 +159,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>23</height>
+     <height>28</height>
     </rect>
    </property>
   </widget>

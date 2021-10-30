@@ -192,3 +192,18 @@ QByteArray MainWindow::ImageToBase64(const QImage &image)
     imageData = imageData.toBase64();
     return imageData;
 }
+
+void MainWindow::on_screenshot_clicked()
+{
+    //QPixmap::grabWindow(QApplication::desktop()->winId()).save("123","jpg");
+    QString cache= "cache/" + QDateTime::currentDateTime().toString("yyyy-MM-ddHH-mm-ss")  + ".jpg";
+    screenshot_UI *scs;
+    scs = new screenshot_UI(nullptr, cache);
+    scs->showFullScreen();
+    scs->setWindowModality(Qt::ApplicationModal);
+    scs->show();
+    image = cache;
+    image_html = ImgPathToHtml(image);
+    this->ui->message->append(image_html);
+}
+

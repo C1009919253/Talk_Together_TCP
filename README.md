@@ -2,7 +2,9 @@
 
 ## Update Log
 
-ver 1.0.4.211029_Base: Add screen shot for server...but failed...
+ver 1.0.5.211030_Base: Add screen shot for server and client...
+
+ver 1.0.4.211029_Base: Add screen shot for server~~...but failed...~~
 
 ver 1.0.3.211016_Base: Fix the picture cache and you can show your name now...
 
@@ -14,7 +16,9 @@ ver 1.0.0.211010_Base: Talk with each other...
 
 ## Bug now
 
-Screen shot fails, shows black screen...
+Screen shot image won't shows in input text...
+
+~~Screen shot fails, shows black screen...~~
 
 ~~The picture cache has something wrong...~~
 
@@ -44,6 +48,10 @@ Not only words, you can send images now!
 ### On what system can it be used?
 
 In theory, it can work in different system like window or ubuntu as long as it can be compiled by qt. Maybe it can be used in cross-system, but I need more tests.
+
+## I can not use screen shot in ubuntu?!
+
+I tested and found the answer. You need update your GPU driver.
 
 ### How to connect you?
 
