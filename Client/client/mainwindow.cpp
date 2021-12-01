@@ -31,7 +31,7 @@ void MainWindow::on_connect_clicked()
 {
     QString serveIP = this->ui->serverip->text();
     QString servePort = this->ui->serverport->text();
-    myClient->connectToHost(QHostAddress(serveIP), servePort.toInt());
+    myClient->connectToHost(serveIP, servePort.toInt());
     connect(myClient, SIGNAL(connected()), this, SLOT(oneProcessConnected()));
     connect(myClient, SIGNAL(readyRead()), this, SLOT(oneProcessReadyRead()));
     connect(myClient, SIGNAL(disconnected()), this, SLOT(oneProcessDisconnected()));
