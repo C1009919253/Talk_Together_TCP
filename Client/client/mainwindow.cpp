@@ -25,6 +25,10 @@ void MainWindow::InitSocket()
     QDir *creatdir = new QDir;
     if(!creatdir->exists("cache"))
         creatdir->mkdir("cache");
+    this->ui->nickname->installEventFilter(this);
+    this->ui->serverip->installEventFilter(this);
+    this->ui->serverport->installEventFilter(this);
+    this->ui->message->installEventFilter(this);
 }
 
 void MainWindow::on_connect_clicked()
@@ -207,3 +211,29 @@ void MainWindow::on_screenshot_clicked()
     this->ui->message->append(image_html);
 }
 
+bool MainWindow::eventFilter(QObject *watched, QEvent *event)
+{
+    if(watched == this->ui->message)
+        if(event->type() == QEvent::KeyPress)
+        {
+            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+            if(keyEvent->key() == Qt::Key_Return || keyEvent->key() == Qt::Key_Enter)
+            {
+                this->on_send_clicked();
+                return true;
+            }
+        }
+
+    if(watched == this->ui->nickname || watched == this->ui->serverip || watched == this->ui->serverport)
+        if(event->type() == QEvent::KeyPress)
+        {
+            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+            if(keyEvent->key() == Qt::Key_Return || keyEvent->key() == Qt::Key_Enter)
+            {
+                this->on_connect_clicked();
+                return true;
+            }
+        }
+
+    return false;
+}

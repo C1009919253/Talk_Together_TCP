@@ -41,6 +41,8 @@ private slots:
 
     void on_screenshot_clicked();
 
+    bool eventFilter(QObject *watched, QEvent *event);
+
 private:
     Ui::MainWindow *ui;
     QTcpSocket *myClient;

@@ -14,6 +14,7 @@
 #include<QBuffer>
 #include<QScreen>
 #include<QPixmap>
+#include<QKeyEvent>
 #include"screenshot_ui.h"
 
 using namespace std;
@@ -47,6 +48,9 @@ private slots:
     void on_select_image_clicked();
 
     void on_screenshot_clicked();
+
+    // void keyPressEvent(QKeyEvent *event);
+    bool eventFilter(QObject *obj, QEvent *event);
 
 private:
     Ui::MainWindow *ui;

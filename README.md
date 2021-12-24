@@ -12,6 +12,8 @@
 
 ## 更新日志
 
+版本1.0.7.211224_Base：添加了回车发送信息和连接服务器的功能。。。
+
 版本1.0.6.211201_Base：现在可以通过域名访问服务器，增加了基于花生壳的服务器
 
 版本1.0.5.211030_Base：添加服务器和客户端的屏幕截图...
@@ -88,6 +90,8 @@ Domain name: 33630r2z27.qicp.vip
 Port: 54652
 
 ## Update Log
+
+ver 1.0.7.211224_Base: Add Enter to send message and connect with server...
 
 ver 1.0.6.211201_ Base: now you can access the server through the domain name, and a peanut shell based server is added
 

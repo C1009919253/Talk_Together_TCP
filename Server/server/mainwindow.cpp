@@ -28,6 +28,11 @@ void MainWindow::InitServe()
     QDir *creatdir = new QDir;
     if(!creatdir->exists("cache"))
         creatdir->mkdir("cache");
+    this->ui->message->installEventFilter(this);
+    this->ui->clientip->installEventFilter(this);
+    this->ui->clientport->installEventFilter(this);
+    this->ui->serverip->installEventFilter(this);
+    this->ui->serverport->installEventFilter(this);
 }
 
 void MainWindow::on_connect_clicked()
@@ -339,3 +344,37 @@ void MainWindow::on_screenshot_clicked()
     this->ui->message->append(image_html);
 }
 
+/*void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    if(event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
+    {
+        this->on_send_clicked();
+    }
+}*/
+
+bool MainWindow::eventFilter(QObject *watched, QEvent *event)
+{
+    if(watched == this->ui->message)
+        if(event->type() == QEvent::KeyPress)
+        {
+            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+            if(keyEvent->key() == Qt::Key_Return || keyEvent->key() == Qt::Key_Enter)
+            {
+                this->on_send_clicked();
+                return true;
+            }
+        }
+
+    if(watched == this->ui->clientip || watched == this->ui->clientport || watched == this->ui->serverip || watched == this->ui->serverport)
+        if(event->type() == QEvent::KeyPress)
+        {
+            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+            if(keyEvent->key() == Qt::Key_Return || keyEvent->key() == Qt::Key_Enter)
+            {
+                this->on_connect_clicked();
+                return true;
+            }
+        }
+
+    return false;
+}
